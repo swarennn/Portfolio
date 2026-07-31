@@ -1,8 +1,8 @@
 import "./style.css";
-import { loadMuseum } from "./museum/Museum";
-import scene from "./core/Scene";
-import camera from "./core/Camera";
-import renderer from "./core/Renderer";
+import { loadMuseum } from "./museum/museum";
+import scene from "./core/scene";
+import camera from "./core/camera";
+import renderer from "./core/renderer";
 import * as THREE from "three";
 import {
     createMuseumControls,
