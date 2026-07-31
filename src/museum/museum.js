@@ -3,8 +3,15 @@ import {
     findNavigationPoints,
     navigationPoints
 } from "../navigation/NavigationManager.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+const dracoLoader = new DRACOLoader();
 
+dracoLoader.setDecoderPath(
+    "https://www.gstatic.com/draco/versioned/decoders/1.5.7/"
+);
 const loader = new GLTFLoader();
+
+loader.setDRACOLoader(dracoLoader);
 
 export function loadMuseum(scene, onLoaded){
 
@@ -40,9 +47,9 @@ setTimeout(()=>{
 
         (xhr)=>{
 
-    const percent = Math.round(
-        (xhr.loaded / xhr.total) * 100
-    );
+    const percent = xhr.total
+    ? Math.round((xhr.loaded / xhr.total) * 100)
+    : 0;
 
     document.getElementById("loading-progress").style.width =
         percent + "%";
