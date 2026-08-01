@@ -2,6 +2,8 @@ export let controlsEnabled = true;
 let isDragging = false;
 let yaw = 0;
 let pitch = 0;
+let lastTouchX = 0;
+let lastTouchY = 0;
 
 export function setCameraRotation(camera){
 
@@ -60,6 +62,53 @@ export function createMuseumControls(camera, renderer){
         camera.rotation.x = pitch;
 
     });
+
+    // ---------- Mobile Touch Controls ----------
+
+renderer.domElement.addEventListener("touchstart", (event) => {
+
+    if (!controlsEnabled) return;
+
+    isDragging = true;
+
+    lastTouchX = event.touches[0].clientX;
+    lastTouchY = event.touches[0].clientY;
+
+}, { passive: true });
+
+renderer.domElement.addEventListener("touchmove", (event) => {
+
+    if (!controlsEnabled) return;
+    if (!isDragging) return;
+
+    const touch = event.touches[0];
+
+    const deltaX = touch.clientX - lastTouchX;
+    const deltaY = touch.clientY - lastTouchY;
+
+    lastTouchX = touch.clientX;
+    lastTouchY = touch.clientY;
+
+    yaw += deltaX * 0.003;
+    pitch += deltaY * 0.003;
+
+    pitch = Math.max(
+        -Math.PI / 2.2,
+        Math.min(Math.PI / 2.2, pitch)
+    );
+
+    camera.rotation.order = "YXZ";
+
+    camera.rotation.y = yaw;
+    camera.rotation.x = pitch;
+
+}, { passive: true });
+
+window.addEventListener("touchend", () => {
+
+    isDragging = false;
+
+});
 
 }
 
