@@ -89,13 +89,13 @@ body{
 
 #loading-progress{
 
-    width:0%;
+    width:40%;
 
     height:100%;
 
     background:white;
 
-    transition:width .2s linear;
+    animation:loadingMove 1.2s ease-in-out infinite;
 
 }
 
@@ -145,48 +145,67 @@ body{
 
     position:fixed;
 
-    top:0;
-    left:0;
+    top:18px;
 
-    width:100%;
+    left:50%;
 
-    padding:25px 35px;
+    transform:translateX(-50%);
 
-    display:grid;
+    width:min(92%,900px);
 
-    grid-template-columns:1fr auto 1fr;
-
-    align-items:center;
-
-    z-index:1000;
-
-    box-sizing:border-box;
-
-    pointer-events:none;
-
-}
-
-.ui-center{
-
-    justify-self:center;
-
-}
-
-.ui-right{
-
-    justify-self:end;
+    height:58px;
 
     display:flex;
 
     align-items:center;
 
-    pointer-events:auto;
+    justify-content:space-between;
+
+    padding:0 18px;
+
+    z-index:1000;
+
+    border-radius:16px;
+
+    background:rgba(25,25,25,.35);
+
+    backdrop-filter:blur(12px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+
+        0 8px 30px rgba(0,0,0,.25);
+
+}
+
+.ui-center{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.ui-right{
+
+    width:60px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
 
 }
 
 #logo{
 
-    width:120px;
+    width:165px;
 
     opacity:.9;
 
@@ -198,7 +217,7 @@ body{
 
     display:flex;
 
-    gap:35px;
+    gap:16px;
 
 }
 
@@ -216,27 +235,15 @@ body{
 
     transition:.25s;
 
+    font-weight:500;
+
+    padding:8px 10px;
+
 }
 
 #desktopMenu a:hover{
 
     opacity:1;
-
-}
-
-#hamburger{
-
-    display:none;
-
-    background:none;
-
-    border:none;
-
-    color:white;
-
-    font-size:30px;
-
-    cursor:pointer;
 
 }
 
@@ -290,6 +297,12 @@ body{
 
 }
 
+#hamburger{
+
+    display:none;
+
+}
+
 /* ---------- Responsive ---------- */
 
 @media(max-width:768px){
@@ -300,15 +313,49 @@ body{
 
     }
 
-    #hamburger{
+    #ui{
 
-        display:block;
+    width:94%;
+
+    height:64px;
+
+    padding:0 16px;
+
+}
+
+#logo{
+
+    width:185px;
+
+}
+
+#hamburger{
+
+    font-size:28px;
+
+}
+
+}
+
+@keyframes loadingMove{
+
+    0%{
+
+        transform:translateX(-120%);
+        width:20%;
 
     }
 
-    #logo{
+    50%{
 
-        width:95px;
+        width:50%;
+
+    }
+
+    100%{
+
+        transform:translateX(520%);
+        width:20%;
 
     }
 

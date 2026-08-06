@@ -89,8 +89,8 @@ renderer.domElement.addEventListener("touchmove", (event) => {
     lastTouchX = touch.clientX;
     lastTouchY = touch.clientY;
 
-    yaw += deltaX * 0.0018;
-    pitch += deltaY * 0.0018;
+    yaw += deltaX * 0.0022;
+    pitch += deltaY * 0.0022;
 
     pitch = Math.max(
         -Math.PI / 2.2,

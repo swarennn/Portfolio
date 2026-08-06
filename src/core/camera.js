@@ -4,7 +4,7 @@ const isMobile = window.innerWidth < 768;
 
 const camera = new THREE.PerspectiveCamera(
 
-    isMobile ? 90 : 75,
+    isMobile ? 82 : 75,
 
     window.innerWidth / window.innerHeight,
 
