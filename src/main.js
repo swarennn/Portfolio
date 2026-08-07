@@ -67,12 +67,18 @@ function animate(){
 
 animate();
 
-const hamburger = document.getElementById("hamburger");
+const menuButton = document.getElementById("ui");
 
 const mobileMenu = document.getElementById("mobileMenu");
 
-hamburger.onclick = ()=>{
+menuButton.onclick = () => {
 
-    mobileMenu.classList.toggle("open");
+    if(window.innerWidth <= 768){
+
+        menuButton.classList.toggle("open");
+
+        mobileMenu.classList.toggle("open");
+
+    }
 
 };
