@@ -17,7 +17,7 @@ export function loadMuseum(scene, onLoaded){
 
     loader.load(
 
-        "/models/museum.glb",
+        "/models/museum-draco.glb",
 
         (gltf)=>{
 
