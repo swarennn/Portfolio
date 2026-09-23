@@ -1,8 +1,8 @@
 import "./style.css";
-import { loadMuseum } from "./museum/Museum.js";
-import scene from "./core/Scene.js";
-import camera from "./core/Camera";
-import renderer from "./core/Renderer.js";
+import { loadMuseum } from "./museum/museum.js";
+import scene from "./core/scene.js";
+import camera from "./core/camera.js";
+import renderer from "./core/renderer.js";
 import {
     createMuseumControls,
     setCameraRotation
