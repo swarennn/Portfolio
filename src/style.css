@@ -373,7 +373,7 @@ body{
 
     align-items:center;
 
-    gap:18px;
+    gap:22px;
 
     max-height:0;
 
@@ -407,11 +407,11 @@ body{
 
 #mobileMenu.open{
 
-    max-height:180px;
+    max-height:220px;
 
     opacity:1;
 
-    padding:18px 0 24px;
+    padding:22px 0 28px;
 
 }
 
@@ -425,6 +425,10 @@ body{
 
         width:92%;
 
+        height:auto;
+
+        min-height:56px;
+
         max-height:56px;
 
         cursor:pointer;
@@ -433,7 +437,7 @@ body{
 
     #ui.open{
 
-        max-height:240px;
+        max-height:300px;
 
     }
 

@@ -10,7 +10,11 @@ renderer.setSize(
 );
 
 renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio,2)
+    Math.min(window.devicePixelRatio, 2)
 );
+
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.AgXToneMapping;
+renderer.toneMappingExposure = 1.2;
 
 export default renderer;

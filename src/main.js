@@ -1,20 +1,50 @@
 import "./style.css";
-import { loadMuseum } from "./museum/museum";
-import scene from "./core/scene";
-import camera from "./core/camera";
-import renderer from "./core/renderer";
-import * as THREE from "three";
+import { loadMuseum } from "./museum/Museum.js";
+import scene from "./core/Scene.js";
+import camera from "./core/Camera";
+import renderer from "./core/Renderer.js";
 import {
     createMuseumControls,
     setCameraRotation
-} from "./controls/MuseumControls";
-import { navigationPoints } from "./navigation/NavigationManager";
+} from "./controls/MuseumControls.js";
+import { navigationPoints } from "./navigation/NavigationManager.js";
 import {
     createMarkers,
     enableMarkerClicks
-} from "./navigation/Markers";
+} from "./navigation/Markers.js";
+import { updateDynamicFocus } from "./effects/DynamicFocus.js";
+import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
+import { BokehPass } from "three/addons/postprocessing/BokehPass.js";
+import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 
 window.camera = camera;
+const composer = new EffectComposer(renderer);
+
+const renderPass = new RenderPass(
+    scene,
+    camera
+);
+
+composer.addPass(renderPass);
+
+const bokehPass = new BokehPass(
+    scene,
+    camera,
+    {
+        focus: 3,
+        aperture: 0.001,
+        maxblur: 0.008
+    }
+);
+
+composer.addPass(bokehPass);
+
+const outputPass = new OutputPass();
+
+composer.addPass(outputPass);
+
+window.renderer = renderer;
 
 document
     .getElementById("app")
@@ -61,8 +91,14 @@ createMuseumControls(camera, renderer);
 function animate(){
 
     requestAnimationFrame(animate);
-    renderer.render(scene,camera);
 
+    updateDynamicFocus(
+        camera,
+        scene,
+        bokehPass
+    );
+
+    composer.render();
 }
 
 animate();

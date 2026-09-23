@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { moveCamera } from "./MoveCamera";
+import { moveCamera } from "./MoveCamera.js";
 export const markers = [];
 import gsap from "gsap";
 export function createMarkers(navigationPoints, scene) {

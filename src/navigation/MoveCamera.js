@@ -7,7 +7,7 @@ import {
     getPitch,
     setYaw,
     setPitch
-} from "../controls/MuseumControls";
+} from "../controls/MuseumControls.js";
 
 export function moveCamera(camera, nav){
 
