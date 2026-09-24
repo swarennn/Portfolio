@@ -19,6 +19,7 @@ import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { BokehPass } from "three/addons/postprocessing/BokehPass.js";
 import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
 import { MotionBlurPass, resetMotionBlur } from "./effects/MotionBlurPass.js";
+import { createPaintingViewer } from "./ui/PaintingViewer.js";
 
 window.camera = camera;
 const composer = new EffectComposer(renderer);
@@ -57,6 +58,8 @@ window.renderer = renderer;
 document
     .getElementById("app")
     .appendChild(renderer.domElement);
+
+createPaintingViewer(scene, camera, renderer);
 
 loadMuseum(scene, () => {
 
@@ -115,18 +118,3 @@ function animate(){
 
 animate();
 
-const menuButton = document.getElementById("ui");
-
-const mobileMenu = document.getElementById("mobileMenu");
-
-menuButton.onclick = () => {
-
-    if(window.innerWidth <= 768){
-
-        menuButton.classList.toggle("open");
-
-        mobileMenu.classList.toggle("open");
-
-    }
-
-};

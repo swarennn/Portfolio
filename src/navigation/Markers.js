@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { moveCamera } from "./MoveCamera.js";
 export const markers = [];
 import gsap from "gsap";
+import { controlsEnabled } from "../controls/MuseumControls.js";
 export function createMarkers(navigationPoints, scene) {
 
     for (const id in navigationPoints) {
@@ -82,6 +83,8 @@ export function enableMarkerClicks(camera, renderer){
     const mouse = new THREE.Vector2();
 
     renderer.domElement.addEventListener("click",(event)=>{
+
+        if (!controlsEnabled) return;
 
         mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
         mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
