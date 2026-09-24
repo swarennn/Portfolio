@@ -62,13 +62,16 @@ export function createPaintingViewer(scene, camera, renderer) {
         raycaster.setFromCamera(pointer, camera);
 
         const hits = raycaster.intersectObject(scene, true);
-        let painting = hits[0]?.object;
-        while (painting && !painting.userData.isPainting) {
-            painting = painting.parent;
-        }
-        if (painting) {
-            event.stopImmediatePropagation();
-            open(painting);
+        for (const hit of hits) {
+            let painting = hit.object;
+            while (painting && !painting.userData.isPainting) {
+                painting = painting.parent;
+            }
+            if (painting) {
+                event.stopImmediatePropagation();
+                open(painting);
+                return;
+            }
         }
     });
 
