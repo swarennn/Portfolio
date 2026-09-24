@@ -2,7 +2,7 @@ import * as THREE from "three";
 const isMobile = window.innerWidth < 768;
 
 const camera = new THREE.PerspectiveCamera(
-    isMobile ? 82 : 40,
+    isMobile ? 82 : 34,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
@@ -20,7 +20,7 @@ window.addEventListener("resize", () => {
 
     camera.aspect = window.innerWidth / window.innerHeight;
 
-    camera.fov = window.innerWidth < 768 ? 82 : 40;
+    camera.fov = window.innerWidth < 768 ? 82 : 34;
 
     camera.updateProjectionMatrix();
 });

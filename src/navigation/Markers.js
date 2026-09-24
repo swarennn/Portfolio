@@ -9,27 +9,14 @@ export function createMarkers(navigationPoints, scene) {
         const nav = navigationPoints[id];
 
         const marker = new THREE.Mesh(
-
-    new THREE.RingGeometry(
-        0.13,
-        0.18,
-        64
-    ),
-
-    new THREE.MeshBasicMaterial({
-
-        color:0xffffff,
-
-        transparent:true,
-
-        opacity:0.35,
-
-        side:THREE.DoubleSide
-
-    })
-    
-
-);
+            new THREE.RingGeometry(0.13, 0.18, 64),
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.35,
+                side: THREE.DoubleSide
+            })
+        );
 
 const hitbox = new THREE.Mesh(
 
@@ -47,13 +34,12 @@ const hitbox = new THREE.Mesh(
 
         // Lay it flat
         marker.rotation.x = -Math.PI / 2;
-        
 
         // Position it
         marker.position.set(
-        nav.position.x,
-        0.2,
-        nav.position.z
+            nav.position.x,
+            0.2,
+            nav.position.z
         );
 
         hitbox.rotation.x = -Math.PI / 2;

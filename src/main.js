@@ -1,4 +1,5 @@
 import "./style.css";
+import * as THREE from "three";
 import { loadMuseum } from "./museum/museum.js";
 import scene from "./core/scene.js";
 import camera from "./core/camera.js";
@@ -17,6 +18,7 @@ import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { BokehPass } from "three/addons/postprocessing/BokehPass.js";
 import { OutputPass } from "three/addons/postprocessing/OutputPass.js";
+import { MotionBlurPass, resetMotionBlur } from "./effects/MotionBlurPass.js";
 
 window.camera = camera;
 const composer = new EffectComposer(renderer);
@@ -34,11 +36,17 @@ const bokehPass = new BokehPass(
     {
         focus: 3,
         aperture: 0.001,
-        maxblur: 0.008
+        maxblur: 0.005
     }
 );
 
 composer.addPass(bokehPass);
+
+const motionBlurPass = new MotionBlurPass();
+composer.addPass(motionBlurPass);
+window.addEventListener("resize", () => {
+    motionBlurPass.mobile = window.innerWidth < 768;
+});
 
 const outputPass = new OutputPass();
 
@@ -77,6 +85,7 @@ camera.rotateX(Math.PI / 2);
 
 // Update our mouse-look system
 setCameraRotation(camera);
+resetMotionBlur(motionBlurPass, camera);
 createMarkers(navigationPoints, scene);
 enableMarkerClicks(
     camera,
@@ -88,9 +97,12 @@ enableMarkerClicks(
 createMuseumControls(camera, renderer);
 
 // Animation
+const motionBlurClock = new THREE.Clock();
 function animate(){
 
     requestAnimationFrame(animate);
+
+    motionBlurPass.update(camera, motionBlurClock.getDelta());
 
     updateDynamicFocus(
         camera,
