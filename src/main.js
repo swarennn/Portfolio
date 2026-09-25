@@ -61,6 +61,36 @@ document
 
 createPaintingViewer(scene, camera, renderer);
 
+function showMuseumInstructions() {
+    const hint = document.getElementById("museum-hint");
+    if (!hint) return;
+
+    const instructions = [
+        "Swipe or drag to look around",
+        "Tap or click a marker to move",
+        "Click or tap a painting to zoom in"
+    ];
+    let index = 0;
+
+    hint.classList.add("visible");
+    hint.innerHTML = `<span class="museum-hint-icon" aria-hidden="true">💡</span><span>${instructions[index]}</span>`;
+
+    const showNextInstruction = () => {
+        hint.classList.remove("visible");
+        index += 1;
+        if (index >= instructions.length) {
+            return;
+        }
+        window.setTimeout(() => {
+            hint.innerHTML = `<span class="museum-hint-icon" aria-hidden="true">💡</span><span>${instructions[index]}</span>`;
+            hint.classList.add("visible");
+            window.setTimeout(showNextInstruction, 4000);
+        }, 400);
+    };
+
+    window.setTimeout(showNextInstruction, 4000);
+}
+
 loadMuseum(scene, () => {
 
     const start = navigationPoints["001"];
@@ -94,6 +124,7 @@ enableMarkerClicks(
     camera,
     renderer
 );
+showMuseumInstructions();
 });
 
 //window.moveTo = (id)=>moveTo(id,camera,controls);

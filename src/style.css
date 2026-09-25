@@ -500,3 +500,46 @@ body{
     }
 
 }
+
+/* Timed museum instructions */
+#museum-hint {
+    position: fixed;
+    top: 82px;
+    left: 50%;
+    z-index: 10002;
+    max-width: min(92vw, 420px);
+    padding: 12px 20px;
+    border: 1px solid rgba(255, 255, 255, .16);
+    border-radius: 14px;
+    color: #fff;
+    background: rgba(20, 20, 20, .48);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .22);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    font-size: 15px;
+    line-height: 1.4;
+    text-align: center;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -6px);
+    transition: opacity .4s ease, transform .4s ease, visibility .4s;
+}
+
+#museum-hint.visible {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+.museum-hint-icon {
+    flex: 0 0 auto;
+    font-size: 17px;
+    line-height: 1;
+}
+
+@media (max-width: 768px) {
+    #museum-hint { top: 78px; font-size: 14px; }
+}
